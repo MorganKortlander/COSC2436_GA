@@ -57,7 +57,8 @@ public:
         int nodeAge,
         int nodeDeposit,
         int nodeDrinks,
-        node *following = nullptr);
+        node *following = nullptr,
+        std::ostream *os=nullptr);
     void addNew(
         std::string nodeName,
         int nodeAge,

@@ -89,6 +89,8 @@ void LL::moveOn(node *&mover)
 
 bool LL::isDuplicate(node *currNode, node *addNode)
 {
+    if (isEmpty())
+        return false;
     if ((currNode->name == addNode->name) && (currNode->age == addNode->age))
         return true;
     return false;
@@ -111,7 +113,8 @@ void LL::Add(
     int nodeAge,
     int nodeDeposit,
     int nodeDrinks,
-    node *following)
+    node *following,
+    std::ostream *os)
 {
     if (index < 0)
     {
@@ -125,10 +128,11 @@ void LL::Add(
         nodeDrinks,
         following);
     // case: empty list or insert at head/index0
-    if (isEmpty() || index == 0)
+    if ((isEmpty() || index == 0) && !isDuplicate(head, addedNode))
     {
         if (!isEmpty())
             addedNode->next = head;
+        
         head = addedNode;
     }
 
