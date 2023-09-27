@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <regex>
-#include <iterator>
+#include <cstdio>
 
 using namespace std;
 
@@ -17,14 +17,14 @@ overload function to accept iterator, so that can be passed in
 std::string decode(std::string &toDec)
 {
 
-    auto opening = '(';
-    auto closing = ')';
-    std::string::iterator itFirst = std::find_if(toDec.begin(), toDec.end(), [opening](auto i){ return i == opening });
+    char opening = '(';
+    char closing = ')';
+    std::string::iterator itFirst = std::find_if(toDec.begin(), toDec.end(), [opening](char i){ return i == opening;});
 
     if (itFirst != toDec.end())
     {
         std::string::iterator itFirst = std::find_if(toDec.begin(), toDec.end(), [opening](auto i){ return i == opening });
-        std::string::iterator itr2 = decode(toDec, itr); // first try not as reference
+        std::string::iterator itr2 = decode(toDec, itr);
         std::string::iterator itrSecond = find ')';
     }
     for (i = itr1)
@@ -34,7 +34,7 @@ std::string decode(std::string &toDec)
     return toDec;
 } // notes: get iterator for the range, remove ( ) then use std::reverse then use std::string.replace to replace old substring with the fixed one
 
-void decode(std::string &part, std::string::iterator itr)
+std::string::iterator decode(std::string &part, std::string::iterator itr)
 {
 
     /* std::string::iterator itr1 = std::find_if(toDec.begin) _, toDec.end() '(';
@@ -50,6 +50,7 @@ void decode(std::string &part, std::string::iterator itr)
 
 int main()
 {
+    freopen("myOutput.txt", "w", stdout);
     std::ifstream inFile("input1.txt");
     std::ofstream ofs("output1.txt");
 
@@ -75,7 +76,7 @@ int main()
     }
 }
 
-void example(std::string perm)
+/* void example(std::string perm)
 { // example reverse iteration
     std::string newPerm = "";
     if (perm.size() < 2)
@@ -100,9 +101,9 @@ void example(std::string perm)
         *(it - 1) = swap;
     }
     }
-}
+} */
 
-std::string maxPerm(std::string perm, int count = 0) //
+/* std::string maxPerm(std::string perm, int count = 0) //
 {
 
     // sentry value
@@ -141,4 +142,4 @@ std::string maxPerm(std::string perm, int count = 0) //
     count++;
     // case 4: change happened, check again
     return maxPerm(perm, count);
-}
+} */
