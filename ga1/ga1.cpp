@@ -5,6 +5,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <regex>
+
 using namespace std;
 
 identity::identity() { head = nullptr; }
@@ -13,7 +16,7 @@ void identity::processInput(
     ifstream &inFile) { // needs further implementation and may need fixing
   string line;
   string barName;
-  while (getline(inFile, line)) {
+  while (getline(inFile>>std::ws, line)) {
     line.erase(remove(line.begin(), line.end(), '\n'), line.end());
     line.erase(remove(line.begin(), line.end(), '\r'), line.end());
     line.erase(remove(line.begin(), line.end(), ' '), line.end());
@@ -24,7 +27,6 @@ void identity::processInput(
     int decodedID = 0;
 
     istringstream iss(line);
-
     iss >> temp;
 
     if (temp == "Bar1" || temp == "Bar2") {
