@@ -16,7 +16,7 @@ overload function to accept iterator, so that can be passed in IF there are pare
  */
 
 // Base function that accepts a string to decode. Should make a local copy of the string. Calls the overloaded version if it finds a '('
-std::string decode(std::string &toDec)
+std::string decode(std::string toDec)
 {
     char openChar = '(';
     char closeChar = ')';
@@ -26,7 +26,7 @@ std::string decode(std::string &toDec)
                                                  { return i == openChar; });
     if (opening != toDec.end())
     {
-        decode("asdf", toDec.begin());
+        decode(toDec, opening+1);
     }
     return toDec;
 }
