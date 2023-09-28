@@ -8,29 +8,10 @@
 #include <regex>
 #include <cstdio>
 
-
-
 /* //plan: find a ( then trigger another call if a ( is found before a ).
 
 overload function to accept iterator, so that can be passed in IF there are parentheses
  */
-
-// Base function that accepts a string to decode. Should make a local copy of the string. Calls the overloaded version if it finds a '('
-std::string decode(std::string toDec)
-{
-    char openChar = '(';
-    char closeChar = ')';
-
-    // find opening (
-    std::string::iterator opening = std::find_if(toDec.begin(), toDec.end(), [openChar](char i)
-                                                 { return i == openChar; });
-    if (opening != toDec.end())
-    {
-        decode(toDec, opening+1);
-    }
-    return toDec;
-}
-// notes: get iterator for the range, remove ( ) then use std::reverse then use std::string.replace to replace old substring with the fixed one
 
 // Overload that accepts a string and an iterator from its first instance of a '('. Since the string in this overloaded function is a reference, any changes made during recursive calls should carry over
 void decode(std::string &toDec, std::string::iterator previous)
@@ -39,7 +20,7 @@ void decode(std::string &toDec, std::string::iterator previous)
     char closeChar = ')';
 
     // find opening (, if any left
-    std::string::iterator opening = std::find_if(previous + 1, toDec.end(), [openChar](char i)
+    std::string::iterator opening = std::find_if(previous+1, toDec.end(), [openChar](char i)
                                                  { return i == openChar; });
     if (opening != toDec.end())
     {
@@ -47,10 +28,11 @@ void decode(std::string &toDec, std::string::iterator previous)
     }
 
     // find closing )
-    std::string::iterator closing = std::find_if(previous, toDec.end(), [closeChar](char i)
+    std::string::iterator closing = std::find_if(previous+1, toDec.end(), [closeChar](char i)
                                                  { return i == closeChar; });
 
     // pull out part to be reversed. Variable closing is technically a "beginning" iterator, so it doesn't need +1, since "ending iterators" are expected go one element past the last one !!!.
+    opening = previous;
     std::cout << "String before: " << toDec << std::endl;
     std::string toReverse(opening + 1, closing);
     std::cout << "Going to reverse: " << toReverse << std::endl;
@@ -63,11 +45,43 @@ void decode(std::string &toDec, std::string::iterator previous)
     std::cout << "String after replacement: " << toDec << std::endl;
 }
 
+// Base function that accepts a string to decode. Should make a local copy of the string. Calls the overloaded version if it finds a '('
+std::string decode(std::string &toDec)
+{
+    char openChar = '(';
+    char closeChar = ')';
+
+    // find opening (
+    std::string::iterator opening = std::find_if(toDec.begin(), toDec.end(), [openChar](char i)
+                                                 { return i == openChar; });
+    if (opening != toDec.end())
+    {
+        decode(toDec, opening);
+        /* std::string::iterator closing = std::find_if(opening, toDec.end(), [closeChar](char i)
+                                                     { return i == closeChar; });
+
+        // pull out part to be reversed. Variable closing is technically a "beginning" iterator, so it doesn't need +1, since "ending iterators" are expected go one element past the last one !!!.
+
+        std::cout << "String before: " << toDec << std::endl;
+        std::string toReverse(opening + 1, closing);
+        std::cout << "Going to reverse: " << toReverse << std::endl;
+        std::reverse(toReverse.begin(), toReverse.end());
+        std::cout << "Reverse out: " << toReverse << std::endl;
+
+        // stick it back in, overwriting where there was ( ). !!! now we have the opposite situation with needing the +1 on closing, instead of opening.
+
+        toDec.replace(opening, closing + 1, toReverse);
+        std::cout << "String after replacement: " << toDec << std::endl; */
+    }
+    return toDec;
+}
+// notes: get iterator for the range, remove ( ) then use std::reverse then use std::string.replace to replace old substring with the fixed one
+
 int main()
 {
     freopen("myOutput.txt", "w", stdout);
 
-    std::string testString = "(as)dbig(god)s"; //should be "sadbigdogs"
+    std::string testString = "(as)dbig(god)s"; // should be "sadbigdogs"
     std::string decoded = decode(testString);
     std::cout << decoded << std::endl;
     return 0;
