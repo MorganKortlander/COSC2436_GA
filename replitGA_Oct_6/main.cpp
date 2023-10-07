@@ -16,19 +16,21 @@ bool filesOpened(std::ifstream &ifs, std::ofstream &ofs);
 bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd);
 std::string burnWS(std::string str);
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
   ArgumentManager am(argc, argv);
-  /*const string input = am.get("input");
-  const string command = am.get("command");
-  const string output = am.get("output");*/
+  /* std::ifstream inFile(am.get("input"));
+  std::ofstream outFile(am.get("output")); */
+  //const string commandFile = am.get("command");
 
-  ifstream inFile("input1.txt");
+  ifstream inFile("input2.txt");
   // ifstream commandFile(command);
-  ofstream outFile("output1.txt");
+  ofstream outFile("output2.txt");
 
   // checks that files are actually open. Returns error code 1 if they are not
   // and closes stream.
-  if (!filesOpened(inFile, outFile)) {
+  if (!filesOpened(inFile, outFile))
+  {
     return 1;
   }
 
@@ -40,29 +42,25 @@ int main(int argc, char *argv[]) {
   list.processInput(inFile);
   std::cout << "\n\nAfter read:" << std::endl;
   list.printRaw(list.getHead());
-  list.selectionSort();
-  std::cout << "\n\nAfter sort:" << std::endl;
-  list.printRaw(list.getHead());
-  /* list.cullTheGuilty();
-  std::cout << "\n\nAfter cull:" << std::endl;
-  list.printRaw(list.getHead()); */
-  /*   list.processInput(inFile);
-    list.selectionSort();
-    list.print(outFile);
-     */
+  
+
+  list.print(outFile);
 
   inFile.close();
   outFile.close();
 }
 
-bool filesOpened(std::ifstream &ifs, std::ofstream &ofs) {
+bool filesOpened(std::ifstream &ifs, std::ofstream &ofs)
+{
   bool opened = true;
-  if (!ofs.is_open()) {
+  if (!ofs.is_open())
+  {
     std::cerr << "failed to open output file." << std::endl;
     opened = false;
     ofs.close();
   }
-  if (!ifs.is_open()) {
+  if (!ifs.is_open())
+  {
     std::cerr << "failed to open input file." << std::endl;
     opened = false;
     ifs.close();
@@ -70,19 +68,23 @@ bool filesOpened(std::ifstream &ifs, std::ofstream &ofs) {
   return opened;
 }
 
-bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd) {
+bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd)
+{
   bool opened = true;
-  if (!ofs.is_open()) {
+  if (!ofs.is_open())
+  {
     std::cerr << "failed to open output file." << std::endl;
     opened = false;
     ofs.close();
   }
-  if (!ifs.is_open()) {
+  if (!ifs.is_open())
+  {
     std::cerr << "failed to open input file." << std::endl;
     opened = false;
     ifs.close();
   }
-  if (!cmd.is_open()) {
+  if (!cmd.is_open())
+  {
     std::cerr << "failed to open command file." << std::endl;
     opened = false;
     cmd.close();
@@ -93,8 +95,8 @@ bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd) {
 // removes newline, carriage ret, and ' ' from a string and returns a new string
 std::string burnWS(std::string str)
 {
-    str.erase(remove(str.begin(), str.end(), '\n'), str.end());
-    str.erase(remove(str.begin(), str.end(), '\r'), str.end());
-    str.erase(remove(str.begin(), str.end(), ' '), str.end());
-    return str;
+  str.erase(remove(str.begin(), str.end(), '\n'), str.end());
+  str.erase(remove(str.begin(), str.end(), '\r'), str.end());
+  str.erase(remove(str.begin(), str.end(), ' '), str.end());
+  return str;
 }

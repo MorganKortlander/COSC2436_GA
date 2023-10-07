@@ -180,10 +180,10 @@ void identity::print(ofstream &out)
   cullTheGuilty();
   out << "Guilty:" << endl; // start pf guilty ids
 
-  node *temp = new node; // creat temporary node
+  node *temp; // creat temporary node
   temp = head;           // Set temp to head;
 
-  while (temp->next != nullptr)
+  while (temp != nullptr)
   { // Output all guilty ids
     if (temp->guilty == true)
     {                             // if guilty is true output id
@@ -195,7 +195,7 @@ void identity::print(ofstream &out)
   out << "Innocent:" << endl; // start of inocent ids
 
   temp = head; // Go back to begining of linked list
-  while (temp->next != nullptr)
+  while (temp != nullptr)
   { // outout all innocent ids
     if (temp->guilty == false)
     {                             // check if innoncent
