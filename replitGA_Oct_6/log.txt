@@ -1,0 +1,69 @@
+
+
+After read:
+
+#0
+decID	1234
+next	0x2449410
+guilty	false
+strID	1234
+
+#1
+decID	3120
+next	0x24493b0
+guilty	false
+strID	3120
+
+#2
+decID	221
+next	0x2449350
+guilty	false
+strID	0221
+
+#3
+decID	202
+next	0x24492f0
+guilty	false
+strID	0202
+
+#4
+decID	1234
+next	0x2449290
+guilty	false
+strID	1234
+
+#5
+decID	1010
+next	0
+guilty	false
+strID	1010
+
+
+After sort:
+
+#0
+decID	202
+next	0x24492f0
+guilty	false
+strID	0202
+
+#1
+decID	1010
+next	0
+guilty	false
+strID	1010
+
+
+After cull:
+
+#0
+decID	202
+next	0x24492f0
+guilty	false
+strID	0202
+
+#1
+decID	1010
+next	0
+guilty	false
+strID	1010
