@@ -5,9 +5,8 @@
 #include <vector>
 using namespace std;
 
-// lazy cout
-
-struct node {
+struct node
+{
   string barName = ""; // is this even needed?
   int decodedID = 0;
   node *next = nullptr;
@@ -15,7 +14,8 @@ struct node {
   std::string strID = "";
 
   // for debugging: outputs our node infos
-  void printnode() {
+  void printnode()
+  {
     /* print("\nNode info:\nLocation"); */
     /*     print(this);
         print("barname");
@@ -27,13 +27,16 @@ struct node {
   }
 };
 
-class identity {
-private:
+class identity
+{
+public:
+  // private:
   node *head;
 
-protected:
-  // checks for dupe numbers
-  bool isDuplicate(node *check, node *against) {
+  // protected:
+  //  checks for dupe numbers
+  bool isDuplicate(node *check, node *against)
+  {
     if (check->strID == against->strID)
       return true;
     return false;
@@ -44,14 +47,15 @@ protected:
   std::string decode(std::string toDec);
   void decode(std::string &toDec, std::string::iterator previous);
 
-public:
-  identity() { head = nullptr; };
+  // public:
+  identity() : head(nullptr) {}
   void processInput(ifstream &inFile);
-  bool isEmpty() {
+  bool isEmpty()
+  {
     if (head == nullptr)
       return true;
     return false;
-  } //'nuff said'
+  } //'nuff said
   node *getHead() const { return head; }
   void cullTheGuilty();
   void addNode(string bN, int dID, std::string stringid);
@@ -60,8 +64,10 @@ public:
   void print(ofstream &out);
 
   // outputs all current nodes to terminal: for deugging pre-filtering
-  void printRaw(node *p, int count = 0) {
-    if (p != nullptr) {
+  void printRaw(node *p, int count = 0)
+  {
+    if (p != nullptr)
+    {
       std::cout << "\n#" << count++ << std::endl;
       p->printnode();
       p = p->next;

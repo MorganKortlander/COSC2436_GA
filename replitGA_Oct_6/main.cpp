@@ -14,6 +14,7 @@ using namespace std;
 bool filesOpened(std::ifstream &ifs, std::ofstream &ofs);
 // check that 3 files opened correctly--function is defined below main
 bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd);
+std::string burnWS(std::string str);
 
 int main(int argc, char *argv[]) {
   ArgumentManager am(argc, argv);
@@ -42,16 +43,16 @@ int main(int argc, char *argv[]) {
   list.selectionSort();
   std::cout << "\n\nAfter sort:" << std::endl;
   list.printRaw(list.getHead());
-  list.cullTheGuilty();
+  /* list.cullTheGuilty();
   std::cout << "\n\nAfter cull:" << std::endl;
-  list.printRaw(list.getHead());
+  list.printRaw(list.getHead()); */
   /*   list.processInput(inFile);
     list.selectionSort();
     list.print(outFile);
      */
 
   inFile.close();
-  // outFile.close();
+  outFile.close();
 }
 
 bool filesOpened(std::ifstream &ifs, std::ofstream &ofs) {
@@ -87,4 +88,13 @@ bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd) {
     cmd.close();
   }
   return opened;
+}
+
+// removes newline, carriage ret, and ' ' from a string and returns a new string
+std::string burnWS(std::string str)
+{
+    str.erase(remove(str.begin(), str.end(), '\n'), str.end());
+    str.erase(remove(str.begin(), str.end(), '\r'), str.end());
+    str.erase(remove(str.begin(), str.end(), ' '), str.end());
+    return str;
 }
