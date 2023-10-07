@@ -2,4 +2,3 @@ Guilty:
 1010
 1234
 2021
-Innocent:

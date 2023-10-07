@@ -19,13 +19,13 @@ std::string burnWS(std::string str);
 int main(int argc, char *argv[])
 {
   ArgumentManager am(argc, argv);
-  /* std::ifstream inFile(am.get("input"));
-  std::ofstream outFile(am.get("output")); */
-  //const string commandFile = am.get("command");
+  std::ifstream inFile(am.get("input"));
+  std::ofstream outFile(am.get("output"));
+  // const string commandFile = am.get("command");
 
-  ifstream inFile("input2.txt");
+  /* ifstream inFile("input2.txt");
   // ifstream commandFile(command);
-  ofstream outFile("output2.txt");
+  ofstream outFile("output2.txt"); */
 
   // checks that files are actually open. Returns error code 1 if they are not
   // and closes stream.
@@ -40,9 +40,16 @@ int main(int argc, char *argv[])
   freopen("log.txt", "w", stdout);
 
   list.processInput(inFile);
-  std::cout << "\n\nAfter read:" << std::endl;
-  list.printRaw(list.getHead());
-  
+  /* std::cout << "\n\nAfter read:" << std::endl;
+  list.printRaw(list.getHead()); */
+
+  /* list.selectionSort();
+  std::cout << "\n\nAfter sort:" << std::endl;
+  list.printRaw(list.getHead()); */
+
+  /* list.cullTheGuilty();
+  std::cout << "\n\nAfter cull:" << std::endl;
+  list.printRaw(list.getHead()); */
 
   list.print(outFile);
 

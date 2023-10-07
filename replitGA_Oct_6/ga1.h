@@ -29,11 +29,13 @@ struct node
 
 class identity
 {
-public:
-  // private:
-  node *head;
 
-  // protected:
+private:
+  node *head;
+  bool guiltyPresent;
+  bool innocentPresent;
+
+protected:
   //  checks for dupe numbers
   bool isDuplicate(node *check, node *against)
   {
@@ -47,8 +49,8 @@ public:
   std::string decode(std::string toDec);
   void decode(std::string &toDec, std::string::iterator previous);
 
-  // public:
-  identity() : head(nullptr) {}
+public:
+  identity() : head(nullptr), guiltyPresent(false), innocentPresent(false) {}
   void processInput(ifstream &inFile);
   bool isEmpty()
   {

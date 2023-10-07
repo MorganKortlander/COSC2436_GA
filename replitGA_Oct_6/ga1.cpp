@@ -9,7 +9,7 @@
 
 using namespace std;
 
-// removes a node amd moves up the head is necessary
+// removes a node and moves up the head if necessary
 void identity::removeNode(node *&toDel)
 {
   if (toDel != nullptr)
@@ -30,7 +30,7 @@ void identity::removeNode(node *&toDel)
 // takes input stream and spits out nodes
 void identity::processInput(
     ifstream &inFile)
-{ // needs further implementation and may need fixing
+{
 
   std::string line = "";
   std::string barName = ""; // need to preserve barname between loops
@@ -149,6 +149,7 @@ void identity::cullTheGuilty()
     if (isDuplicate(curr, nextNode))
     {
       curr->guilty = true;
+      guiltyPresent = true; // indicates presence of a guilty node
       curr->next = nextNode->next;
       removeNode(nextNode);
       nextNode = curr->next;
@@ -159,6 +160,16 @@ void identity::cullTheGuilty()
       nextNode = nextNode->next;
       curr = curr->next;
     }
+  }
+
+  // check if innocent nodes present
+  node *innCheck = head;
+  while (innCheck != nullptr)
+  {
+    if (innCheck->guilty == false)
+      innocentPresent = true; // indicates presence of a guilty node
+
+    innCheck = innCheck->next;
   }
 }
 
@@ -178,30 +189,37 @@ void identity::print(ofstream &out)
    }
    */
   cullTheGuilty();
-  out << "Guilty:" << endl; // start pf guilty ids
+  if (guiltyPresent == true)
+  {
+    out << "Guilty:" << endl; // start pf guilty ids
 
-  node *temp; // creat temporary node
-  temp = head;           // Set temp to head;
+    node *temp;  // create temporary node
+    temp = head; // Set temp to head;
 
-  while (temp != nullptr)
-  { // Output all guilty ids
-    if (temp->guilty == true)
-    {                             // if guilty is true output id
-      out << temp->strID << endl; // output id
+    while (temp != nullptr)
+    { // Output all guilty ids
+      if (temp->guilty == true)
+      {                             // if guilty is true output id
+        out << temp->strID << endl; // output id
+      }
+      temp = temp->next; // Move to next node
     }
-    temp = temp->next; // Move to next node
   }
+  if (innocentPresent == true)
+  {
+    out << "Innocent:" << endl; // start of inocent ids
+    node *temp;                 // create temporary node
+    temp = head;                // Set temp to head;
 
-  out << "Innocent:" << endl; // start of inocent ids
-
-  temp = head; // Go back to begining of linked list
-  while (temp != nullptr)
-  { // outout all innocent ids
-    if (temp->guilty == false)
-    {                             // check if innoncent
-      out << temp->strID << endl; // output id if innocent
+    temp = head; // Go back to begining of linked list
+    while (temp != nullptr)
+    { // outout all innocent ids
+      if (temp->guilty == false)
+      {                             // check if innoncent
+        out << temp->strID << endl; // output id if innocent
+      }
+      temp = temp->next; // Move to next node
     }
-    temp = temp->next; // Move to next node
   }
 }
 
@@ -225,8 +243,7 @@ void identity::decode(std::string &toDec, std::string::iterator previous)
 
   // find closing )
   std::string::iterator closing =
-      std::find_if(previous + 1, toDec.end(),
-                   [closeChar](char i)
+      std::find_if(previous + 1, toDec.end(), [closeChar](char i)
                    { return i == closeChar; });
 
   opening = previous; // just for my sanity, reused the var name
