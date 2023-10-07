@@ -4,31 +4,31 @@ After read:
 
 #0
 decID	1234
-next	0x7ffbcce05b30
+next	0x7f95a4405bb0
 guilty	false
 strID	1234
 
 #1
 decID	3120
-next	0x7ffbcce05ae0
+next	0x7f95a4405b60
 guilty	false
 strID	3120
 
 #2
 decID	221
-next	0x7ffbcce05a90
+next	0x7f95a4405b10
 guilty	false
 strID	0221
 
 #3
 decID	202
-next	0x7ffbcce05a40
+next	0x7f95a4405ac0
 guilty	false
 strID	0202
 
 #4
 decID	1234
-next	0x7ffbcce059f0
+next	0x7f95a4405a70
 guilty	false
 strID	1234
 
@@ -42,19 +42,37 @@ strID	1010
 After sort:
 
 #0
-decID	1234
-next	0x7ffbcce05a40
+decID	202
+next	0x7f95a4405bb0
 guilty	false
-strID	1234
+strID	0202
 
 #1
+decID	221
+next	0x7f95a4405b60
+guilty	false
+strID	0221
+
+#2
 decID	1010
-next	0x7ffbcce059f0
+next	0x7f95a4405b10
 guilty	false
 strID	1010
 
-#2
+#3
 decID	1234
-next	0x0
+next	0x7f95a4405ac0
 guilty	false
 strID	1234
+
+#4
+decID	1234
+next	0x7f95a4405a70
+guilty	false
+strID	1234
+
+#5
+decID	3120
+next	0x0
+guilty	false
+strID	3120

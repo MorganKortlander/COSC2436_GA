@@ -87,12 +87,6 @@ void identity::addNode(string bN, int dID, std::string stringid)
 // should be false for them all when it is called
 void identity::swap(node *a, node *b)
 {
-  if (a == b)
-    return;
-  else if (a == head)
-    head = b;
-  else if (b == head)
-    head = a;
   std::swap(b->barName, a->barName);
   std::swap(b->strID, a->strID);
   std::swap(a->decodedID, b->decodedID);
@@ -131,7 +125,7 @@ void identity::selectionSort()
       nextNode = nextNode->next;
     }
     identity::swap(curr, minNode);
-    curr = minNode->next;
+    curr = curr->next;
   }
 }
 
