@@ -98,12 +98,3 @@ bool filesOpened(std::ifstream &ifs, std::ofstream &ofs, std::ifstream &cmd)
   }
   return opened;
 }
-
-// removes newline, carriage ret, and ' ' from a string and returns a new string
-std::string burnWS(std::string str)
-{
-  str.erase(remove(str.begin(), str.end(), '\n'), str.end());
-  str.erase(remove(str.begin(), str.end(), '\r'), str.end());
-  str.erase(remove(str.begin(), str.end(), ' '), str.end());
-  return str;
-}
