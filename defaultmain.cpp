@@ -2,6 +2,8 @@
 #include <fstream>
 // #include "header.h"
 
+// beautful code
+
 int main(int argc, char *argv[])
 {
     ArgumentManager am(argc, argv);
