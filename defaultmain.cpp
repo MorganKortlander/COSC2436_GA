@@ -2,7 +2,7 @@
 #include <fstream>
 // #include "header.h"
 
-// beautful code
+// beautiful code
 
 int main(int argc, char *argv[])
 {
