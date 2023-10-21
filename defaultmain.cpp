@@ -4,6 +4,9 @@
 
 // beautful code
 // it's working!!!
+// beautiful code
+
+// my commentr
 
 int main(int argc, char *argv[])
 {
